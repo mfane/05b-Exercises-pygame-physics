@@ -56,8 +56,14 @@ class Runner(pygame.sprite.Sprite):
 		else:
 			self.rect.x += vx
 			self.rect.y += vy
+			x = (self.width + self.margin_x) * 8 + self.margin_x
+			y = (self.height + self.margin_y) * 1 + self.margin_y
+			self.image.blit(self.sheet, (0,0), (x,y,self.width,self.height))
 			vy += gravity
 			if self.rect.top >= self.ground:
+				x = (self.width + self.margin_x) * 9 + self.margin_x
+				y = (self.height + self.margin_y) * 1 + self.margin_y
+				self.image.blit(self.sheet, (0, 0), (x, y, self.width, self.height))
 				self.rect.top = self.ground
 				vy = 0
 				self.jumping = False
@@ -69,6 +75,9 @@ class Runner(pygame.sprite.Sprite):
 			vy -= self.jump_velocity
 			self.velocity = (vx,vy)
 			self.jumping = True
+			x = (self.width + self.margin_x) * 7 + self.margin_x
+			y = (self.height + self.margin_y) * 1 + self.margin_y
+			self.image.blit(self.sheet, (0, 0), (x, y, self.width, self.height))
 				
 
 def main():

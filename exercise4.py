@@ -37,12 +37,12 @@ def main():
 	SONG_END = pygame.USEREVENT + 1
 	pygame.mixer.music.set_endevent(SONG_END)
 
-	soundtrack = ['Ambient_Blues_Joe_ID_773.mp3','Chief_Inspector_Baldwin_ID_873.mp3']
+	soundtrack = ['Frequency_Decree_-_07_-_Stop.mp3','Magna_Ingress_-_10_-_Letting_Go.mp3','Split_Phase_-_35_-_Lockdown.mp3']
 	current_track = random.choice(soundtrack)
 	pygame.mixer.music.load(os.path.join('mp3', current_track))
 	pygame.mixer.music.play()
 	
-	sound_files = ['snare.wav','drumsticks.wav']
+	sound_files = ['snare.wav','drumsticks.wav','341341__jtuttle__rubberband-1.wav','341644__sss-samples__boom-kick.wav','341341__dpsa__clap.wav']
 	sound_library = []
 	for s in sound_files:
 		sound_library.append(pygame.mixer.Sound(os.path.join('mp3', s)))
@@ -65,8 +65,13 @@ def main():
 					sound_library[1].play()
 				if keys[pygame.K_LEFT]:
 					logging.info('Pressed left')
+					sound_library[2].play()
 				if keys[pygame.K_RIGHT]:
 					logging.info('Pressed right')
+					sound_library[4].play()
+				if keys[pygame.K_b]:
+					logging.info('Pressed b')
+					sound_library[3].play()
 
 			if event.type == SONG_END:		# we created a new event type that fires when the song is over
 				logging.info('Song ended')

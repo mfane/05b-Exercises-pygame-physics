@@ -22,9 +22,9 @@ logger = logging.getLogger(__name__)
 screen_size = (600,600)
 FPS = 60
 black = (0,0,0)
-gravity = 0
-friction = 0
-air_resistance = 0
+gravity = 1
+friction = 0.5
+air_resistance = 0.2
 
 class Ball(pygame.sprite.Sprite):
 	def __init__(self, i, size, color, position, direction):
@@ -41,29 +41,29 @@ class Ball(pygame.sprite.Sprite):
 	def update(self):
 		(dx,dy) = self.direction	# get the current velocity
 		self.rect.x += dx		# move the sprite horizontally
-		self.rect.y += dy
+		self.rect.y += dy #move the sprite vertically
 
-		dy = dy + gravity
-		dx *= (1.0-air_resistance)
-		dy *= (1.0-air_resistance)
+		dy = dy + gravity #sets the sprites new y velocity based on gravity
+		dx *= (1.0-air_resistance) #sets the sprites new x velocity based on the air resistance
+		dy *= (1.0-air_resistance) #sets the sprites new y velocity based on the air resistance
 		
-		(WIDTH,HEIGHT) = screen_size
-		if self.rect.right >= WIDTH:
-			self.rect.right = WIDTH
-			dx = dx * -1 * (1.0-friction)
-		if self.rect.left <= 0:
-			self.rect.left = 0
-			dx = dx * -1 * (1.0-friction)
-		if self.rect.top <= 0:
-			self.rect.top = 0
-			dy = dy * -1 * (1.0-friction)
-		if self.rect.bottom >= HEIGHT:
-			self.rect.bottom = HEIGHT
-			dx = dx * -1 * (1.0-friction)
-			dy = dy * -1 * (1.0-friction)
+		(WIDTH,HEIGHT) = screen_size #creates a tupple off of the screen_size
+		if self.rect.right >= WIDTH: #checks to see if the sprite is on or past the right side of the screen
+			self.rect.right = WIDTH #sets the sprites right side to be equal with the screen width
+			dx = dx * -1 * (1.0-friction) #sets the x velocity to move in the opposite direction
+		if self.rect.left <= 0: #checks to see if the sprite is on or past the left side of the screen
+			self.rect.left = 0 #sets the sprites left side to be equal with the screen width
+			dx = dx * -1 * (1.0-friction) #sets the x velocity to move in the opposite direction
+		if self.rect.top <= 0: #checks to see if the sprite is on or over the top side of the screen
+			self.rect.top = 0 #sets the sprites top side to be equal with the screen width
+			dy = dy * -1 * (1.0-friction) #sets the y velocity to move in the opposite direction
+		if self.rect.bottom >= HEIGHT: #checks to see if the sprite is on or over the bottom side of the screen
+			self.rect.bottom = HEIGHT #sets the sprites bottom side to be equal with the screen width
+			dx = dx * -1 * (1.0-friction) #sets the x velocity to move in the opposite direction
+			dy = dy * -1 * (1.0-friction) #sets the y velocity to move in the opposite direction
 			if abs(dy) < 1:			# a hack to keep it from bouncing forever
-				dy = 0
-		self.direction = (dx,dy)
+				dy = 0 #sets the y velocity to 0
+		self.direction = (dx,dy) #updates the sprites velocity
 
 
 def main():
